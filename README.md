@@ -35,24 +35,25 @@ keeping the normal Ratatui fallback visible, install Ratty and run:
 
 ```sh
 cargo install --git https://github.com/orhun/ratty
-RATHERAPIA_RATTY=1 ratherapia
+cargo install --git https://github.com/ozzyocak/ratherapia
 ```
 
-From source:
+Open Ratty, then run Ratherapia inside the Ratty terminal:
 
 ```sh
-RATHERAPIA_RATTY=1 cargo run
+ratherapia --ratty
 ```
 
-The app registers `assets/objects/SpinyMouse.glb` and places it in the middle of
-the visual stage. Regular terminals should use plain `cargo run`.
-
-This repository includes `config/ratty.toml`, so launching `ratty` from the
-project directory starts the synth directly with Ratty graphics enabled:
+From source, open Ratty, `cd` into the project directory, then run:
 
 ```sh
-ratty
+cargo run -- --ratty
 ```
+
+The app exports the bundled `ZenMouse.obj` model to a temp file at runtime and
+registers that path with Ratty, so the 3D mouse works from installed binaries as
+well as from source. Regular terminals should use plain `ratherapia` or
+`cargo run`.
 
 ## Render a Ratatui Video
 

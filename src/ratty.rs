@@ -1,17 +1,24 @@
 use std::io::{self, Write};
+use std::path::PathBuf;
+use std::sync::OnceLock;
 
 use ratatui::layout::Rect;
 
 const MOUSE_ID: u32 = 42;
-const MOUSE_PATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/assets/objects/SpinyMouse.glb");
-const MOUSE_FORMAT: &str = "glb";
+const MOUSE_FORMAT: &str = "obj";
+const MOUSE_FILE: &str = "ZenMouse.obj";
+const MOUSE_BYTES: &[u8] = include_bytes!("../assets/objects/ZenMouse.obj");
 
 pub fn enabled() -> bool {
-    std::env::var_os("RATHERAPIA_RATTY").is_some()
+    static ENABLED: OnceLock<bool> = OnceLock::new();
+    *ENABLED.get_or_init(|| {
+        std::env::var_os("RATHERAPIA_RATTY").is_some()
+            || std::env::args().any(|arg| arg == "--ratty")
+    })
 }
 
 pub fn register_mouse<W: Write>(writer: &mut W) -> io::Result<()> {
-    writer.write_all(register_sequence().as_bytes())?;
+    writer.write_all(register_sequence()?.as_bytes())?;
     writer.flush()
 }
 
@@ -47,10 +54,32 @@ pub fn mouse_delete_sequence() -> String {
     delete_sequence()
 }
 
-fn register_sequence() -> String {
-    format!("\x1b_ratty;g;r;id={MOUSE_ID};fmt={MOUSE_FORMAT};path={MOUSE_PATH}\x1b\\")
+fn register_sequence() -> io::Result<String> {
+    let path = mouse_asset_path()?;
+    Ok(format!(
+        "\x1b_ratty;g;r;id={MOUSE_ID};fmt={MOUSE_FORMAT};path={}\x1b\\",
+        path.display()
+    ))
 }
 
 fn delete_sequence() -> String {
     format!("\x1b_ratty;g;d;id={MOUSE_ID}\x1b\\")
+}
+
+fn mouse_asset_path() -> io::Result<PathBuf> {
+    let dir = std::env::temp_dir()
+        .join("ratherapia")
+        .join("assets")
+        .join("objects");
+    let path = dir.join(MOUSE_FILE);
+    let needs_write = std::fs::metadata(&path)
+        .map(|metadata| metadata.len() != MOUSE_BYTES.len() as u64)
+        .unwrap_or(true);
+
+    if needs_write {
+        std::fs::create_dir_all(&dir)?;
+        std::fs::write(&path, MOUSE_BYTES)?;
+    }
+
+    Ok(path)
 }

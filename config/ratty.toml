@@ -9,8 +9,8 @@ default_rows = 32
 scrollback = 2000
 
 [shell]
-program = "scripts/run-ratty-synth.sh"
-args = []
+program = "/bin/zsh"
+args = ["-lc", "exec ratherapia --ratty"]
 
 [env]
 TERM = "xterm-256color"
@@ -22,7 +22,7 @@ style = "Regular"
 size = 18
 
 [cursor.model]
-path = "SpinyMouse.glb"
+path = "../assets/objects/SpinyMouse.glb"
 scale_factor = 3.4
 brightness = 0.72
 x_offset = 0.0
