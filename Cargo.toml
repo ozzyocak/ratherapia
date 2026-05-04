@@ -1,6 +1,6 @@
 [package]
 name = "ratherapia"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["ozzy ocak <ozzyocak@gmail.com>"]
 description = "A calming Rust/Ratatui ambient synth with rain, sound textures, and Ratty inline 3D."

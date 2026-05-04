@@ -35,7 +35,7 @@ keeping the normal Ratatui fallback visible, install Ratty and run:
 
 ```sh
 cargo install --git https://github.com/orhun/ratty
-cargo install --git https://github.com/ozzyocak/ratherapia
+cargo install ratherapia --force
 ```
 
 Open Ratty, then run Ratherapia inside the Ratty terminal:
