@@ -5,9 +5,9 @@ use std::sync::OnceLock;
 use ratatui::layout::Rect;
 
 const MOUSE_ID: u32 = 42;
-const MOUSE_FORMAT: &str = "obj";
-const MOUSE_FILE: &str = "ZenMouse.obj";
-const MOUSE_BYTES: &[u8] = include_bytes!("../assets/objects/ZenMouse.obj");
+const MOUSE_FORMAT: &str = "glb";
+const MOUSE_FILE: &str = "SpinyMouse.glb";
+const MOUSE_BYTES: &[u8] = include_bytes!("../assets/objects/SpinyMouse.glb");
 
 pub fn enabled() -> bool {
     static ENABLED: OnceLock<bool> = OnceLock::new();
@@ -67,10 +67,7 @@ fn delete_sequence() -> String {
 }
 
 fn mouse_asset_path() -> io::Result<PathBuf> {
-    let dir = std::env::temp_dir()
-        .join("ratherapia")
-        .join("assets")
-        .join("objects");
+    let dir = PathBuf::from("assets").join("objects");
     let path = dir.join(MOUSE_FILE);
     let needs_write = std::fs::metadata(&path)
         .map(|metadata| metadata.len() != MOUSE_BYTES.len() as u64)

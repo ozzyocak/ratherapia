@@ -50,10 +50,9 @@ From source, open Ratty, `cd` into the project directory, then run:
 cargo run -- --ratty
 ```
 
-The app exports the bundled `ZenMouse.obj` model to a temp file at runtime and
-registers that path with Ratty, so the 3D mouse works from installed binaries as
-well as from source. Regular terminals should use plain `ratherapia` or
-`cargo run`.
+The app registers the bundled `SpinyMouse.glb` model with Ratty from
+`assets/objects`, so the polished 3D mouse is used instead of the rough OBJ
+fallback. Regular terminals should use plain `ratherapia` or `cargo run`.
 
 ## Render a Ratatui Video
 
