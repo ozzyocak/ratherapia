@@ -1,0 +1,71 @@
+[window]
+width = 1100
+height = 720
+scale_factor = 1.0
+
+[terminal]
+default_cols = 104
+default_rows = 32
+scrollback = 2000
+
+[shell]
+program = "scripts/run-ratty-synth.sh"
+args = []
+
+[env]
+TERM = "xterm-256color"
+RATHERAPIA_RATTY = "1"
+
+[font]
+family = "DejaVu Sans Mono"
+style = "Regular"
+size = 18
+
+[cursor.model]
+path = "SpinyMouse.glb"
+scale_factor = 3.4
+brightness = 0.72
+x_offset = 0.0
+plane_offset = 18.0
+visible = false
+
+[cursor.animation]
+spin_speed = 1.1
+bob_speed = 2.0
+bob_amplitude = 0.06
+
+[bindings]
+keys = [
+  { key = "C", with = "Control | alt", action = "Copy" },
+  { key = "V", with = "Control | alt", action = "Paste" },
+  { key = "Equal", with = "Control", action = "IncreaseFontSize" },
+  { key = "Minus", with = "Control", action = "DecreaseFontSize" },
+  { key = "Enter", with = "Control | alt", action = "ToggleMode" },
+  { key = "Up", with = "Control | alt", action = "IncreaseWarp" },
+  { key = "Down", with = "Control | alt", action = "DecreaseWarp" },
+]
+
+[theme]
+foreground = "#dcd7ba"
+background = "#111318"
+cursor = "#7e9cd8"
+
+[theme.normal]
+black = "#000000"
+red = "#cd3131"
+green = "#0dbc79"
+yellow = "#e5e510"
+blue = "#2472c8"
+magenta = "#bc3fbc"
+cyan = "#11a8cd"
+white = "#e5e5e5"
+
+[theme.bright]
+black = "#666666"
+red = "#f14c4c"
+green = "#23d18b"
+yellow = "#f5f543"
+blue = "#3b8eea"
+magenta = "#d670d6"
+cyan = "#29b8db"
+white = "#ffffff"

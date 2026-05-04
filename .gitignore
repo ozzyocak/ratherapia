@@ -1,0 +1,4 @@
+target/
+renders/
+.DS_Store
+*.log
